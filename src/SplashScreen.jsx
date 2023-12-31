@@ -22,7 +22,7 @@ export default function SplashScreen() {
         backgroundColor: "#db4f4f",
         borderBottom: "2px solid #000",
       }}
-      className="animate__animated animate__slideOutUp animate__delay-5s"
+      className="animate__animated animate__slideOutUp animate__delay-2s"
     >
       <Box
         className="animate__animated animate__pulse animate__infinite"
