@@ -9,8 +9,7 @@ import { useEffect } from "react"
 import SplashScreen from "./SplashScreen"
 
 axios.defaults.baseURL = "https://copadelmar-api-production.up.railway.app/"
-axios.defaults.headers.post["Content-Type"] =
-  "application/x-www-form-urlencoded"
+axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded"
 
 // Add a response interceptor
 axios.interceptors.response.use(

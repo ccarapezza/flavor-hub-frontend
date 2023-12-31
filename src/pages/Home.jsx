@@ -224,8 +224,8 @@ export default function Home() {
             </>
           :
           <>
-            <Box sx={{display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column"}}>
-              <img src="/vite.svg" alt="CodeloCup" style={{width:"100%", maxWidth:"500px"}}/>
+            <Box sx={{display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column"}} className="animate__animated animate__fadeIn main-logo-animation">
+              <img src="/logo.png" alt="CodeloCup" style={{width:"100%", maxWidth:"500px"}}/>
             </Box>
             <Button variant="outlined" fullWidth onClick={()=>{navigate("/login")}}>
               <span className="fa-layers fa-fw fa-2x">
