@@ -18,12 +18,12 @@ Page.propTypes = {
     title: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired,
     footer: PropTypes.bool,
-    style: PropTypes.object,
+    sx: PropTypes.object,
     loading: PropTypes.bool,
     containerMaxWidth: PropTypes.string,
 };
 
-export default function Page({ title, children, footer = true, style, loading = false, containerMaxWidth }) {
+export default function Page({ title, children, footer = true, sx, loading = false, containerMaxWidth }) {
   const context = useContext(Context);
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate= useNavigate();
@@ -262,7 +262,7 @@ export default function Page({ title, children, footer = true, style, loading = 
           }
         </Box>
       </Drawer>
-      <Container maxWidth={containerMaxWidth} sx={{p: 2, mb:footer && context.isParticipanteLogged?16:2, ...style }}>
+      <Container maxWidth={containerMaxWidth} sx={{p: 2, mb:footer && context.isParticipanteLogged?16:2, ...sx }}>
         {loading?
           <Loading/>
         :
@@ -270,7 +270,7 @@ export default function Page({ title, children, footer = true, style, loading = 
         }
       </Container>
       {footer && context.isParticipanteLogged &&
-        <AppBar position="fixed" color="secondary" sx={{ top: "auto", bottom: 0 }}>
+        <AppBar position="fixed" color="secondary" sx={{ top: "auto", bottom: 0}}>
           <Box sx={{ p: 1 }}>
             {context.isJuradoLogged?
               <Chip variant="outlined" size="small" sx={{color: "white"}} label={<Box sx={{display: "flex", alignItems: "center", px: 1}}>

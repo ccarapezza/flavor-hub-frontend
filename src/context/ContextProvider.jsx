@@ -22,6 +22,8 @@ function ContextProvider({ children }) {
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [severity, setSeverity] = useState("info");
 
+  const [showSplashScreen, setShowSplashScreen] = useState(false);
+
   const handleSnackbarClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -144,7 +146,11 @@ function ContextProvider({ children }) {
         },
         participanteLogin: (hash) => {
           return participanteLogin(hash);
-        }
+        },
+        hideSplashScreen: () => {
+          setShowSplashScreen(false);
+        },
+        isShowSplashScreen: showSplashScreen
       }}>
         {children}
         <Snackbar open={snackbarOpen} autoHideDuration={3000} onClose={handleSnackbarClose}>

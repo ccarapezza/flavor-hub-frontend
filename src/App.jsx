@@ -76,8 +76,8 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-        <SplashScreen/>
       <ContextProvider>
+        <SplashScreen />
         <DynamicRoutes />
       </ContextProvider>
     </ThemeProvider>

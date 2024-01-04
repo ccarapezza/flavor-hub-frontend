@@ -26,6 +26,7 @@ export default function CreateParticipante() {
   const [grow, setGrow] = useState("");
 
   const [esGrow, setEsGrow] = useState(false);
+  const [esInvitado, setEsInvitado] = useState(false);
 
   const onSubmit = () => {
     createParticipante();
@@ -35,7 +36,7 @@ export default function CreateParticipante() {
     axios.post("/api/participante/create",{
       name: nombre,
       dni: dni,
-      muestras: muestras,
+      muestras: esInvitado?[]:muestras,
       dojoId: dojo?dojo:null,
       grow: grow?grow:null
     }).then(function (response) {     
@@ -136,36 +137,41 @@ export default function CreateParticipante() {
             }
           </Box>
           <SelectDojo value={dojo} onChange={(e)=>setDojo(e?.target?.value)}/>
-          <Divider>
-            <Chip label="Muestras" />
-          </Divider>
-          <List sx={{paddingTop: "0", marginTop: 0}}>
-            {muestras.map((muestra, index)=>{
-              return(
-                <div key={index}>
-                  <ListItem>
-                    <Stack width="100%" spacing={2}>
-                      <Box sx={{display:"flex", justifyContent:"space-between" }}>
-                        <Chip label={"#"+(index+1)}/>
-                        <IconButton size="small" component="span" disabled={index===0} onClick={()=>{removeMuestra(index)}}>
-                          <Delete fontSize="small"/>
-                        </IconButton>
-                      </Box>
-                      <TextField {...register("muestra-name-input"+index, { required: true })} error={errors["muestra-name-input"+index]?true:false} label="Nombre" variant="outlined" value={muestras[index]?.name} onChange={(e)=>setNombreMuestra(index, e?.target?.value)}/>
-                      <TextField id="muestra-desc-input" label="Banco/Criador" variant="outlined" value={muestras[index]?.description} onChange={(e)=>setDescripcionMuestra(index, e?.target?.value)}/>
-                      <SelectCategoria optionsEnable={false} selectProps={{...register("categoria-input"+index, { required: true })}} error={errors["categoria-input"+index]?true:false} value={muestras[index]?.categoriaId} onChange={(e)=>setCategoriaMuestra(index, e?.target?.value)}/>
-                    </Stack>
-                  </ListItem>
-                  <Divider/>
-                </div>
-              )
-            })}
-            <ListItem sx={{display: "flex", justifyContent: "end"}}>
-              <Button sx={{padding: "5px"}} size="small" color="success" variant="outlined" startIcon={<AddCircleOutline />} onClick={()=>{addMuestra()}}>
-                Agregar Muestra
-              </Button>
-            </ListItem>
-          </List>
+          <FormControlLabel control={<Switch checked={esInvitado} onChange={(e)=>setEsInvitado(e.target.checked)} />} label="Es Invitado?" sx={{whiteSpace:"nowrap"}}/>
+          {!esInvitado&&
+            <>
+                <Divider>
+                    <Chip label="Muestras" />
+                </Divider>
+                <List sx={{paddingTop: "0", marginTop: 0}}>
+                    {muestras.map((muestra, index)=>{
+                    return(
+                        <div key={index}>
+                        <ListItem>
+                            <Stack width="100%" spacing={2}>
+                            <Box sx={{display:"flex", justifyContent:"space-between" }}>
+                                <Chip label={"#"+(index+1)}/>
+                                <IconButton size="small" component="span" disabled={index===0} onClick={()=>{removeMuestra(index)}}>
+                                <Delete fontSize="small"/>
+                                </IconButton>
+                            </Box>
+                            <TextField {...register("muestra-name-input"+index, { required: true })} error={errors["muestra-name-input"+index]?true:false} label="Nombre" variant="outlined" value={muestras[index]?.name} onChange={(e)=>setNombreMuestra(index, e?.target?.value)}/>
+                            <TextField id="muestra-desc-input" label="Banco/Criador" variant="outlined" value={muestras[index]?.description} onChange={(e)=>setDescripcionMuestra(index, e?.target?.value)}/>
+                            <SelectCategoria optionsEnable={false} selectProps={{...register("categoria-input"+index, { required: true })}} error={errors["categoria-input"+index]?true:false} value={muestras[index]?.categoriaId} onChange={(e)=>setCategoriaMuestra(index, e?.target?.value)}/>
+                            </Stack>
+                        </ListItem>
+                        <Divider/>
+                        </div>
+                    )
+                    })}
+                    <ListItem sx={{display: "flex", justifyContent: "end"}}>
+                    <Button sx={{padding: "5px"}} size="small" color="success" variant="outlined" startIcon={<AddCircleOutline />} onClick={()=>{addMuestra()}}>
+                        Agregar Muestra
+                    </Button>
+                    </ListItem>
+                </List>
+            </>
+          }
           <Button type="submit" size="large" color="primary" variant="contained" startIcon={<Save />}>
             Guardar
           </Button>

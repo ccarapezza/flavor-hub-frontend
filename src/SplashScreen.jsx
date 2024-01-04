@@ -1,8 +1,18 @@
 import { Box, Typography } from "@mui/material"
+import { useContext } from "react"
+import Context from "./context/Context"
 import { useEffect } from "react"
 
 export default function SplashScreen() {
-  useEffect(() => {}, [])
+  const context = useContext(Context)
+
+  useEffect(() => {
+    return () => {
+        if(context.isShowSplashScreen){
+            context.setIsShowSplashScreen(false)
+        }
+    }
+  }, [context])
 
   return (
     <Box
@@ -19,10 +29,13 @@ export default function SplashScreen() {
         justifyContent: "center",
         alignItems: "center",
         overflow: "hidden",
-        backgroundColor: "#db4f4f",
-        borderBottom: "2px solid #000",
+        backgroundColor: "#db4f4f"
       }}
-      className="animate__animated animate__slideOutUp animate__delay-2s"
+      className={`animate__animated ${
+        context.isShowSplashScreen
+          ? ""
+          : " animate__slideOutUp animate__delay-1s"
+      }`}
     >
       <Box
         className="animate__animated animate__pulse animate__infinite"

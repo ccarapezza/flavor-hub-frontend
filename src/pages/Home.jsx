@@ -224,17 +224,17 @@ export default function Home() {
             </>
           :
           <>
-            <Box sx={{display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column"}} className="animate__animated animate__fadeIn main-logo-animation">
-              <img src="/logo.png" alt="CodeloCup" style={{width:"100%", maxWidth:"500px"}}/>
+            <Box sx={{display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", height: "80vh"}} className="animate__animated animate__fadeIn main-logo-animation">
+                <img src="/logo-2.png" alt="CodeloCup" style={{width:"100%", maxWidth:"400px", zIndex: 99}}/>
+                <Button variant="outlined" fullWidth onClick={()=>{navigate("/login")}} sx={{mt:2}}>
+                    <span className="fa-layers fa-fw fa-2x">
+                        <FontAwesomeIcon icon={faUser} transform="shrink-6 left-1"/>
+                        <FontAwesomeIcon icon={faSquare} transform="shrink-11 down-4 right-4"/>
+                        <FontAwesomeIcon icon={faQrcode} inverse transform="shrink-12 down-4 right-4"/>
+                    </span>
+                    <span>Ingresar</span>
+                </Button>
             </Box>
-            <Button variant="outlined" fullWidth onClick={()=>{navigate("/login")}}>
-              <span className="fa-layers fa-fw fa-2x">
-                <FontAwesomeIcon icon={faUser} transform="shrink-6 left-1"/>
-                <FontAwesomeIcon icon={faSquare} transform="shrink-11 down-4 right-4"/>
-                <FontAwesomeIcon icon={faQrcode} inverse transform="shrink-12 down-4 right-4"/>
-              </span>
-              <span>Ingresar</span>
-            </Button>
           </>
         }
       </Stack>

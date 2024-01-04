@@ -74,7 +74,7 @@ export default function EditParticipante() {
       })
 
     }
-  }, [context, id])
+  }, [id])
 
   const reloadParticipante = () => {
     axios.get("/api/participante",{

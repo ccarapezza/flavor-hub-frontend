@@ -9,7 +9,9 @@ const initial = {
     showMessage: (message, severity = "info") => { },
     login: (username, password) => { },
     logout: () => { },
-    participanteLogin: (hash) => {}
+    participanteLogin: (hash) => {},
+    hideSplashScreen: () => { },
+    isShowSplashScreen: true
 }
 
 const Context = createContext(initial);
