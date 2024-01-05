@@ -157,7 +157,7 @@ export default function ConsultaCalificacion() {
                     setPromedioData(promedioData.concat(promedioDataResponse));
                     addMuestra(
                         {
-                            label: 'Muestra #'+muestraId,
+                            label: 'Muestra #'+promedioDataResponse?.muestraId,
                             data: promedioDataResponse.valores.map(currentValor=>currentValor.valor),
                             backgroundColor: alpha(ComparatorColors[promedio?.datasets.length], 0.2),
                             borderColor: ComparatorColors[promedio?.datasets.length],
@@ -250,6 +250,8 @@ export default function ConsultaCalificacion() {
                                                         <Divider/>
                                                     </Fragment>)
                                                 })}
+                                                <InputLabel htmlFor={idInput} sx={{fontWeight: "bold"}}><span>Promedio Total: </span><strong style={{paddingLeft:"5px"}}>{currentPromedio.promedioTotal}</strong></InputLabel>
+                                                <Rating name={idInput} value={currentPromedio.promedioTotal} max={10} readOnly sx={{fontSize: "1.4rem"}}/>
                                                 <Divider sx={{marginBottom: "5px"}}/>
                                                 <InputLabel>Calificaciones: <strong style={{paddingLeft:"5px"}}>{currentPromedio.count}</strong></InputLabel>
                                             </Paper>
@@ -268,6 +270,8 @@ export default function ConsultaCalificacion() {
                                                                         <Divider/>
                                                                     </>)
                                                                 })}
+                                                                <InputLabel htmlFor={idInput} sx={{fontWeight: "bold"}}><span>Promedio Total: </span><strong style={{paddingLeft:"5px"}}>{currentValor.promedioTotal}</strong></InputLabel>
+                                                                <Rating name={idInput} value={currentValor.promedioTotal} max={10} readOnly sx={{fontSize: "1.4rem"}}/>
                                                                 <Divider sx={{marginBottom: "5px"}}/>
                                                                 <Box sx={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
                                                                     <Chip variant="outlined" label={calificacion.participante.mesa?.name?calificacion.participante.mesa?.name:"SIN MESA"} />
