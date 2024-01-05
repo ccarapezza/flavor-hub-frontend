@@ -20,7 +20,7 @@ export default function ConsultaCalificacion() {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
-    const [camera, setCamera] = useState("environment");
+    const [camera, setCamera] = useState(FacingMode.ENVIRONMENT)
     
     const [verGrafico, setVerGrafico] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -175,8 +175,12 @@ export default function ConsultaCalificacion() {
     }
 
     const switchCamera = () => {
-        setCamera(camera === "environment" ? "user" : "environment");
-    };
+        setCamera(
+          camera === FacingMode.ENVIRONMENT
+            ? FacingMode.USER
+            : FacingMode.ENVIRONMENT
+        )
+    }
 
     const handleScan = (data) => {
         if (data) {

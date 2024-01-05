@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import Page from "../Page";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCannabis, faChair, faEdit, faPlus, faStoreAlt, faTrash, faVihara } from '@fortawesome/free-solid-svg-icons'
-import { orange, green, deepPurple, lightGreen } from '@mui/material/colors';
+import { orange, green, deepPurple, lightGreen, blueGrey } from '@mui/material/colors';
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 import CategoriaColors from "../../colors/CategoriaColors";
@@ -14,6 +14,7 @@ import ConfirmModal from "../../components/ConfirmModal";
 import Context from "../../context/Context";
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { faPersonThroughWindow } from "@fortawesome/free-solid-svg-icons";
 
 export default function ListParticipante() {
   const context = useContext(Context);
@@ -31,6 +32,7 @@ export default function ListParticipante() {
     axios.get("/api/participante/list")
     .then(function (response) {
       // handle success
+      console.log(response)
       if(response.status === 200){
         setParticipantes(response.data);
       }
@@ -109,6 +111,9 @@ export default function ListParticipante() {
                                 <Typography variant="h5" sx={{mr:1, fontWeight: "bold"}}>{participante.name}</Typography>
                                 {participante.dojo&&
                                   <Chip component="div" icon={<FontAwesomeIcon icon={faVihara} style={{color: "white"}}/>} size="small" label={participante.dojo?.name} sx={{mr: 1, backgroundColor: deepPurple[400], color: "white"}}/>
+                                }
+                                {participante.esInvitado&&
+                                  <Chip component="div" icon={<FontAwesomeIcon icon={faPersonThroughWindow} style={{color: "white"}}/>} size="small" label="Invitado" sx={{mr: 1, backgroundColor: blueGrey[400], color: "white"}}/>
                                 }
                                 {participante.grow&&
                                   <Chip title="Es Grow" icon={

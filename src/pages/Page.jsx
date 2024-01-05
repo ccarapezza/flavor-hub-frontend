@@ -189,7 +189,7 @@ export default function Page({ title, children, footer = true, sx, loading = fal
               <Divider sx={{mb:2}}>
                 <Chip label="Avanzando" color="primary"/>
               </Divider>
-              <ListItem sx={{py:0}} button key={"participante-qr-list"} onClick={()=>{navigate("/change-admin-pass")}}>
+              <ListItem sx={{py:0}} button key={"change-admin-pass"} onClick={()=>{navigate("/change-admin-pass")}}>
                 <ListItemIcon>
                   <span className="fa-layers fa-fw fa-2x">
                     <FontAwesomeIcon icon={faKey} transform="shrink-6 left-1"/>

@@ -130,16 +130,16 @@ export default function CreateParticipante() {
         <Stack width="100%" spacing={2}>
           <TextField {...register("name-input", { required: true })} error={errors["name-input"]?true:false} fullWidth id="name-input" label="Nombre" variant="outlined" value={nombre} onChange={(e)=>setNombre(e?.target?.value)} />
           <TextField type="number" {...register("dni-input", { required: true })} error={errors["dni-input"]?true:false} fullWidth id="dni-input" label="DNI" variant="outlined" value={dni} onChange={(e)=>setDni(e?.target?.value)} />
-          <Box sx={{display:"flex", flexDirection: "row" }}>
-            <FormControlLabel control={<Switch checked={esGrow} onChange={(e)=>setEsGrow(e.target.checked)} />} label="Es Grow?" sx={{whiteSpace:"nowrap"}}/>
-            {esGrow&&
-              <TextField {...register("grow-name-input", { required: true })} error={errors["grow-name-input"]?true:false} fullWidth id="grow-name-input" label="Nombre" variant="outlined" value={grow} onChange={(e)=>setGrow(e?.target?.value)} />
-            }
-          </Box>
-          <SelectDojo value={dojo} onChange={(e)=>setDojo(e?.target?.value)}/>
           <FormControlLabel control={<Switch checked={esInvitado} onChange={(e)=>setEsInvitado(e.target.checked)} />} label="Es Invitado?" sx={{whiteSpace:"nowrap"}}/>
-          {!esInvitado&&
-            <>
+            {!esInvitado&&
+              <>
+                <Box sx={{display:"flex", flexDirection: "row" }}>
+                    <FormControlLabel control={<Switch checked={esGrow} onChange={(e)=>setEsGrow(e.target.checked)} />} label="Es Grow?" sx={{whiteSpace:"nowrap"}}/>
+                    {esGrow&&
+                    <TextField {...register("grow-name-input", { required: true })} error={errors["grow-name-input"]?true:false} fullWidth id="grow-name-input" label="Nombre" variant="outlined" value={grow} onChange={(e)=>setGrow(e?.target?.value)} />
+                    }
+                </Box>
+                <SelectDojo value={dojo} onChange={(e)=>setDojo(e?.target?.value)}/>
                 <Divider>
                     <Chip label="Muestras" />
                 </Divider>

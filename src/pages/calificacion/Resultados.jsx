@@ -14,6 +14,7 @@ import { useTheme } from "@emotion/react";
 import EnhancedTable from "../../components/EnhancedTable";
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import { styled } from '@mui/material/styles';
+import { faPersonThroughWindow } from "@fortawesome/free-solid-svg-icons";
 
 export default function Resultados() {
   const [loading, setLoading] = useState(false); 
@@ -36,6 +37,7 @@ export default function Resultados() {
   const [dojoFilter, setDojoFilter] = useState(false);
   const [growFilter, setGrowFilter] = useState(false);
   const [juradoFilter, setJuradoFilter] = useState(false);
+  const [invitadoFilter, setInvitadoFilter] = useState(false);
   const [participanteFilter, setParticipanteFilter] = useState(false);  
 
   const [labels, setLabels] = useState([]);
@@ -90,6 +92,8 @@ export default function Resultados() {
           return calificacion.participante.esJurado;
         }else if(participanteFilter){
           return !calificacion.participante.esJurado;
+        }else if(invitadoFilter){
+          return calificacion.participante.esInvitado;
         }else{
           return true;
         }
@@ -117,7 +121,7 @@ export default function Resultados() {
         m[d.muestraId].calificaciones.push(d);
         return m;
     },{}));
-  }, [calificaciones, juradoFilter, participanteFilter])
+  }, [calificaciones, juradoFilter, participanteFilter, invitadoFilter])
 
   useEffect(() => {
     setMuestraSelected(null);
@@ -311,8 +315,9 @@ export default function Resultados() {
           </Box>
         <Divider/>
           <Box sx={{display:"flex", flexDirection:matches?"row":"column"}}>
-            <FormControlLabel sx={{flexGrow: 1, whiteSpace:"nowrap", mx:1, textAlign: "center", display: "inline", alignSelf: "center"}} control={<Switch checked={juradoFilter} onChange={(e)=>{setJuradoFilter(e.target.checked); setParticipanteFilter(e.target.checked?false:participanteFilter);}} />} label={<><FontAwesomeIcon icon={faGavel}/>Solo Jurados</>}/>
-            <FormControlLabel sx={{flexGrow: 1, whiteSpace:"nowrap", mx:1, textAlign: "center", display: "inline", alignSelf: "center"}} control={<Switch checked={participanteFilter} onChange={(e)=>{setParticipanteFilter(e.target.checked); setJuradoFilter(e.target.checked?false:juradoFilter);}} />} label={<><FontAwesomeIcon icon={faUser}/>Solo Participantes</>}/>
+            <FormControlLabel sx={{flexGrow: 1, whiteSpace:"nowrap", mx:1, textAlign: "center", display: "inline", alignSelf: "center"}} control={<Switch checked={juradoFilter} onChange={(e)=>{setJuradoFilter(e.target.checked); setParticipanteFilter(e.target.checked?false:participanteFilter); setInvitadoFilter(e.target.checked?false:invitadoFilter);}} />} label={<><FontAwesomeIcon icon={faGavel}/>Solo Jurados</>}/>
+            <FormControlLabel sx={{flexGrow: 1, whiteSpace:"nowrap", mx:1, textAlign: "center", display: "inline", alignSelf: "center"}} control={<Switch checked={participanteFilter} onChange={(e)=>{setParticipanteFilter(e.target.checked); setJuradoFilter(e.target.checked?false:juradoFilter); setInvitadoFilter(e.target.checked?false:invitadoFilter);}} />} label={<><FontAwesomeIcon icon={faUser}/>Solo Participantes</>}/>
+            <FormControlLabel sx={{flexGrow: 1, whiteSpace:"nowrap", mx:1, textAlign: "center", display: "inline", alignSelf: "center"}} control={<Switch checked={invitadoFilter} onChange={(e)=>{setInvitadoFilter(e.target.checked); setJuradoFilter(e.target.checked?false:juradoFilter); setParticipanteFilter(e.target.checked?false:participanteFilter);}} />} label={<><FontAwesomeIcon icon={faPersonThroughWindow}/>Solo Invitados</>}/>
           </Box>
         <Divider/>
         <Stack sx={{display:"flex", flexDirection:"row", justifyContent:"center", alignItems:"center", margin: 1}} direction="row" spacing={1}>

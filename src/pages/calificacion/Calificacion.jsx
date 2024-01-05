@@ -19,7 +19,7 @@ export default function Calificacion() {
     const context = useContext(Context);
     const { calificacionHash } = useParams();
 
-    const [camera, setCamera] = useState("environment");
+    const [camera, setCamera] = useState(FacingMode.ENVIRONMENT)
 
     const [hashMuestra, setHashMuestra] = useState(calificacionHash);
     const [idMuestra, setIdMuestra] = useState();
@@ -83,8 +83,12 @@ export default function Calificacion() {
     };
 
     const switchCamera = () => {
-        setCamera(camera === "environment" ? "user" : "environment");
-    };
+        setCamera(
+          camera === FacingMode.ENVIRONMENT
+            ? FacingMode.USER
+            : FacingMode.ENVIRONMENT
+        )
+    }
 
     const handleScan = (data) => {
         if (data) {
