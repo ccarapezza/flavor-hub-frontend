@@ -119,46 +119,38 @@ export default function ConsultaCalificacion() {
             hashMuestra: hash
         }).then(function (response) {
             if (response.status === 200) {
-                const calificacionesData = response.data?.calificaciones;
+                const data = response.data;
                 let muestraId = 0;
-                const promedioDataResponse = [calificacionesData.reduce(function(m, d){
-                    if(!m){
-                        m = {
-                            ...d,
-                            count: 1,
-                            promedioTotal: (d.valores.reduce((previousValue, currentValue)=>previousValue+currentValue.valor, 0) / d.valores.length),
-                            calificaciones: []
-                        };
-                        muestraId = d.muestra.id;
-                        delete d.muestra;
-                        m.calificaciones.push(d);
-                        return m;
-                    }
-                    m.valores = m.valores.map((currentValor, index)=>{
-                        currentValor.valor += d.valores[index].valor;
-                        return currentValor.valor;
-                    });
-                    m.promedioTotal = d.valores.reduce((previousValue, currentValue)=>previousValue+currentValue.valor, 0) / d.valores.length;
-                    m.count += 1;
-                    delete d.muestra;
-                    m.calificaciones.push(d);
-                    return m;
-                },null)].map((calificacion)=>{
-                    if(calificacion){
-                        return({
-                          ...calificacion,
-                          valores: calificacion.valores.map((currentValor)=>{
-                            return({
-                              ...currentValor,
-                              valor: Math.round(currentValor.valor/calificacion.count * 10) / 10
-                            })
-                          }),
-                          promedioTotal: Math.round(calificacion.promedioTotal/calificacion.count * 10) / 10
-                        })
-                    }else{
-                        return(null);
-                    }
-                })[0];
+                const promedioDataResponse = {
+                    muestra: data.calificaciones[0].muestra,
+                    muestraId: data.calificaciones[0].muestraId,
+                    promedioTotal: data.calificaciones.reduce((acc, calificacion) => {
+                        return acc + calificacion.valores.reduce((acc, valor) => {
+                            return acc + valor.valor
+                        }, 0) / calificacion.valores.length
+                    }, 0) / data.calificaciones.length,
+                    calificaciones: data.calificaciones.map(calificacion => {
+                        return {
+                            id: calificacion.id,
+                            createAt: calificacion.createAt,
+                            updatedAt: calificacion.updatedAt,
+                            participante: calificacion.participante,
+                            participanteId: calificacion.participanteId,
+                            valores: calificacion.valores,
+                            promedioTotal: calificacion.valores.reduce((acc, valor) => {
+                                return acc + valor.valor
+                            }, 0) / calificacion.valores.length
+                        }
+                    }),
+                    valores: data.calificaciones[0].valores.map(valor => {
+                        return {
+                            label: valor.label,
+                            promedioTotal: data.calificaciones.reduce((acc, calificacion) => {
+                                return acc + calificacion.valores.find(v => v.label === valor.label).valor
+                            }, 0) / data.calificaciones.length
+                        }
+                    })
+                }
 
                 if(promedioDataResponse){
                     setPromedioData(promedioData.concat(promedioDataResponse));
