@@ -126,7 +126,7 @@ export default function ConsultaCalificacion() {
                         m = {
                             ...d,
                             count: 1,
-                            promedioTotal: (d.valores.reduce((previousValue, currentValue)=>previousValue.valor+currentValue.valor, 0) / d.valores.length),
+                            promedioTotal: (d.valores.reduce((previousValue, currentValue)=>previousValue+currentValue.valor, 0) / d.valores.length),
                             calificaciones: []
                         };
                         muestraId = d.muestra.id;
@@ -150,7 +150,7 @@ export default function ConsultaCalificacion() {
                           valores: calificacion.valores.map((currentValor)=>{
                             return({
                               ...currentValor,
-                              valor: Math.round(currentValor/calificacion.count * 10) / 10
+                              valor: Math.round(currentValor.valor/calificacion.count * 10) / 10
                             })
                           }),
                           promedioTotal: Math.round(calificacion.promedioTotal/calificacion.count * 10) / 10
