@@ -8,7 +8,7 @@ import { blueGrey, deepOrange } from "@mui/material/colors"
 import { useEffect } from "react"
 import SplashScreen from "./SplashScreen"
 
-axios.defaults.baseURL = "http://localhost:8080/"
+axios.defaults.baseURL = "https://copadelmar-api-production.up.railway.app/"
 axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded"
 
 // Add a response interceptor
