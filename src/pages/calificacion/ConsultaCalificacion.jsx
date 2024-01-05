@@ -145,11 +145,12 @@ export default function ConsultaCalificacion() {
                     valores: data.calificaciones[0].valores.map(valor => {
                         return {
                             label: valor.label,
-                            promedioTotal: data.calificaciones.reduce((acc, calificacion) => {
+                            valor: data.calificaciones.reduce((acc, calificacion) => {
                                 return acc + calificacion.valores.find(v => v.label === valor.label).valor
                             }, 0) / data.calificaciones.length
                         }
-                    })
+                    }),
+                    count: data.calificaciones.length
                 }
 
                 if(promedioDataResponse){
