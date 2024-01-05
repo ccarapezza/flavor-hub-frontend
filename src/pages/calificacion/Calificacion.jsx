@@ -13,6 +13,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { red } from '@mui/material/colors';
 import { Typography } from '@mui/material';
 import CategoriaColors from '../../colors/CategoriaColors';
+import FacingMode from '../../Constants';
 
 export default function Calificacion() {
     let navigate = useNavigate();

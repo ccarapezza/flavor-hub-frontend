@@ -14,6 +14,7 @@ import { ExpandMore } from '@mui/icons-material';
 import { useTheme } from '@emotion/react';
 import { useMediaQuery } from '@mui/material';
 import { Fragment } from 'react';
+import FacingMode from '../../Constants';
 
 export default function ConsultaCalificacion() {
     const context = useContext(Context);
