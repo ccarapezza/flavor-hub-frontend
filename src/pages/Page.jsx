@@ -13,6 +13,7 @@ import { faCannabis, faChair, faCogs, faGavel, faHome, faKey, faListAlt, faPollH
 import { deepOrange, indigo, yellow } from "@mui/material/colors";
 import Loading from "../components/Loading";
 import PropTypes from "prop-types";
+import { faPersonThroughWindow } from "@fortawesome/free-solid-svg-icons";
 
 Page.propTypes = {
     title: PropTypes.string.isRequired,
@@ -278,10 +279,17 @@ export default function Page({ title, children, footer = true, sx, loading = fal
                 <Typography sx={{fontSize: "1rem"}}>Jurado</Typography>
               </Box>}/>
               :
-              <Typography sx={{ fontSize: "1rem", fontWeight: "bold" }}>
-                Participante
-              </Typography>
-
+              <>
+              {context.participanteData?.esInvitado?
+                <Typography sx={{ fontSize: "1rem", fontWeight: "bold" }}>
+                  <FontAwesomeIcon icon={faPersonThroughWindow} sx={{mr: 2}}/>Invitado
+                </Typography>
+              :
+                <Typography sx={{ fontSize: "1rem", fontWeight: "bold" }}>
+                  Participante
+                </Typography>
+              }
+              </>
             }
             <Typography variant="h5" component="div">
               <Chip variant={"outlined"} label={"#"+context.participanteData?.n} sx={{ mr: 1, bgcolor: deepOrange[500], color:"white!important" }}/>{context.participanteData?.name}
