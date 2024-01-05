@@ -282,7 +282,7 @@ export default function Page({ title, children, footer = true, sx, loading = fal
               <>
               {context.participanteData?.esInvitado?
                 <Typography sx={{ fontSize: "1rem", fontWeight: "bold" }}>
-                  <FontAwesomeIcon icon={faPersonThroughWindow} sx={{mr: 2}}/>Invitado
+                  <FontAwesomeIcon icon={faPersonThroughWindow} sx={{mx: 2}}/>Invitado
                 </Typography>
               :
                 <Typography sx={{ fontSize: "1rem", fontWeight: "bold" }}>
