@@ -252,7 +252,6 @@ export default function ConsultaCalificacion() {
                                                 {currentPromedio.valores.map((currentValor, index)=>{
                                                     const idInput = "valores-promedio-"+index+"-input"
                                                     return(<Fragment key={idInput+"key"}>
-                                                        {JSON.stringify(currentPromedio)}
                                                         <InputLabel htmlFor={idInput}><span>{currentValor.label}: </span><strong style={{paddingLeft:"5px"}}>{currentValor.valor}</strong></InputLabel>
                                                         <Rating name={idInput} value={currentValor.valor} max={10} readOnly sx={{fontSize: "1.4rem"}}/>
                                                         <Divider/>
