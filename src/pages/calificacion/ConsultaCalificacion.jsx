@@ -8,6 +8,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera, faCircle, faClock, faSquareFull, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import Loading from '../../components/Loading';
+import {
+    Chart as ChartJS,
+    RadialLinearScale,
+    PointElement,
+    LineElement,
+    Filler,
+    Tooltip,
+    Legend,
+} from 'chart.js';
 import { Radar } from 'react-chartjs-2';
 import ComparatorColors from '../../colors/ComparatorColors';
 import { ExpandMore } from '@mui/icons-material';
@@ -15,6 +24,15 @@ import { useTheme } from '@emotion/react';
 import { useMediaQuery } from '@mui/material';
 import { Fragment } from 'react';
 import FacingMode from '../../Constants';
+
+ChartJS.register(
+    RadialLinearScale,
+    PointElement,
+    LineElement,
+    Filler,
+    Tooltip,
+    Legend
+);
 
 export default function ConsultaCalificacion() {
     const context = useContext(Context);
